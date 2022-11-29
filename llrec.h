@@ -78,11 +78,25 @@ Node* llfilter(Node* head, Comp pred);
 template <typename Comp>
 Node* llfilter(Node* head, Comp pred)
 {
-    //*********************************************
-    // Provide your implementation below
-    //*********************************************
-
-
+  if (head == nullptr) //empty list 
+  {
+    return head; 
+  }
+  
+  Node* copyOfList = llfilter(head->next, pred);
+  if (!pred(head->val)) //if true (remove)
+  { 
+    head->next = copyOfList;
+    return head;
+  }
+  else
+  {
+    delete head;
+    return copyOfList;
+  }
+  return head;
 }
-
 #endif
+
+
+
